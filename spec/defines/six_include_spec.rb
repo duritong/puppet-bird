@@ -16,7 +16,7 @@ describe 'bird::six::include', :type => 'define' do
     it { should compile.with_all_deps }
     it { should contain_file('/etc/bird6.d/01-test.conf').with(
       :owner   => 'root',
-      :group   => 'bird',
+      :group   => 'bird6',
       :mode    => '0640',
       :notify  => 'Service[bird6]',
     )}
@@ -34,7 +34,7 @@ describe 'bird::six::include', :type => 'define' do
     it { should contain_file('/etc/bird6.d/01-test.conf').with(
       :source  => 'puppet:///my_bird/test.conf',
       :owner   => 'root',
-      :group   => 'bird',
+      :group   => 'bird6',
       :mode    => '0640',
       :notify  => 'Service[bird6]',
     )}

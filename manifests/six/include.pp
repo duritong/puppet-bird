@@ -9,7 +9,7 @@ define bird::six::include(
   include ::bird::six
   file{"/etc/bird6.d/${name}.conf":
     owner  => 'root',
-    group  => 'bird',
+    group  => 'bird6',
     mode   => '0640',
     notify => Service['bird6'],
   }
