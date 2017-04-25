@@ -10,7 +10,7 @@
 # Identity of this bird instance. Default: the ipaddress fact
 #
 class bird::six(
-  $router_id = $ipaddress,
+  $router_id = pick($default_ipaddress,$ipaddress),
 ) {
   package{'bird6':
     ensure => 'installed',
