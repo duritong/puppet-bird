@@ -9,18 +9,18 @@
 # * `router_id`
 # Identity of this bird instance. Default: the ipaddress fact
 #
-class bird::six(
-  $router_id = pick($default_ipaddress,$ipaddress),
+class bird::six (
+  $router_id = $facts['networking']['ip'],
 ) {
-  package{'bird6':
+  package { 'bird6':
     ensure => 'installed',
-  } -> file{'/etc/bird6.conf':
+  } -> file { '/etc/bird6.conf':
     content => template('bird/bird6.conf.erb'),
     owner   => 'root',
     group   => 'bird6',
     mode    => '0640',
     notify  => Service['bird6'],
-  } -> file{'/etc/bird6.d':
+  } -> file { '/etc/bird6.d':
     ensure  => directory,
     purge   => true,
     recurse => true,
@@ -28,7 +28,7 @@ class bird::six(
     owner   => root,
     group   => 'bird6',
     mode    => '0640',
-  } ~> service{'bird6':
+  } ~> service { 'bird6':
     ensure => 'running',
     enable => true,
   }
